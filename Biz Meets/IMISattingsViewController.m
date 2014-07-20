@@ -249,7 +249,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	// Change the height if Edit Unknown Contact is the row selected
-	return 55;
+    
+    if(indexPath.section == 0 && indexPath.row == 3)
+        return 70;
+    else
+        return 55;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string    {

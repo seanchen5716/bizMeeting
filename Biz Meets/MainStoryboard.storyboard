@@ -221,7 +221,7 @@
                                 <color key="textColor" red="0.50196081400000003" green="0.50588238240000005" blue="0.50980395079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minValue="0.0" maxValue="9999" translatesAutoresizingMaskIntoConstraints="NO" id="N2r-bi-0NM">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="9999" translatesAutoresizingMaskIntoConstraints="NO" id="N2r-bi-0NM">
                                 <rect key="frame" x="35" y="40" width="265" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
