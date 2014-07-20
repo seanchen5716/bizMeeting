@@ -143,7 +143,7 @@ NSString *ApplicationDidFinishContactSyncing = @"ApplicationDidFinishContactSync
     
     // Add a task to the group
     dispatch_group_async(group, queue, ^{
-        int numberofContact = CFArrayGetCount(contactArray);
+        int numberofContact = (int)CFArrayGetCount(contactArray);
         for (int count = 0; count < numberofContact; count++) {
             ABRecordRef person = CFArrayGetValueAtIndex(contactArray, count);
             CFRetain(person);
@@ -338,7 +338,7 @@ void addressBookChanged(ABAddressBookRef addressBook, CFDictionaryRef info, void
     BOOL status = [[DataBase database] saveMeet:meetInfo];
     
     if(status)  {
-        IMIContactModel* contact = [self recordReferenceWithRecordID:[[meetInfo objectForKey:@"PersonId"] integerValue]];
+        IMIContactModel* contact = [self recordReferenceWithRecordID:(int)[[meetInfo objectForKey:@"PersonId"] integerValue]];
         [contact refreshContact];
         return YES;
     }
@@ -349,7 +349,7 @@ void addressBookChanged(ABAddressBookRef addressBook, CFDictionaryRef info, void
     
     BOOL status = [[DataBase database] updateRecordWithMeetInfo:meetInfo];
     if(status)  {
-        IMIContactModel* contact = [self recordReferenceWithRecordID:[[meetInfo objectForKey:@"PersonId"] integerValue]];
+        IMIContactModel* contact = [self recordReferenceWithRecordID:(int)[[meetInfo objectForKey:@"PersonId"] integerValue]];
         [contact refreshContact];
         return YES;
     }
@@ -379,7 +379,7 @@ void addressBookChanged(ABAddressBookRef addressBook, CFDictionaryRef info, void
     @synchronized(self) {
         NSPredicate *todaysMeetsPredicate = [NSPredicate predicateWithBlock: ^BOOL(id obj, NSDictionary *bind){
             IMIContactModel* contact = (IMIContactModel*)obj;
-            int futuremeets1 =contact.todaysUpcommingMeets;
+            int futuremeets1 =(int)contact.todaysUpcommingMeets;
             return (futuremeets1 > 0);
         }];
         NSArray *todaysMeetArray = [self.contactModelArray filteredArrayUsingPredicate:todaysMeetsPredicate];
@@ -387,14 +387,14 @@ void addressBookChanged(ABAddressBookRef addressBook, CFDictionaryRef info, void
         
         NSPredicate *futureMeetsPredicate = [NSPredicate predicateWithBlock: ^BOOL(id obj, NSDictionary *bind){
             IMIContactModel* contact = (IMIContactModel*)obj;
-            int futuremeets1 = contact.futureMeetsExcludingTodaysMeets;
+            int futuremeets1 = (int)contact.futureMeetsExcludingTodaysMeets;
             return (futuremeets1 > 0 && contact.todaysUpcommingMeets <= 0);
         }];
         NSArray *futureMeetArray = [self.contactModelArray filteredArrayUsingPredicate:futureMeetsPredicate];
         
         NSPredicate *allPastMeetsPredicate = [NSPredicate predicateWithBlock: ^BOOL(id obj, NSDictionary *bind){
             IMIContactModel* contact = (IMIContactModel*)obj;
-            int futuremeets = contact.futureMeetsExcludingTodaysMeets + contact.todaysUpcommingMeets;
+            int futuremeets = (int)contact.futureMeetsExcludingTodaysMeets + (int)contact.todaysUpcommingMeets;
             return ([contact.allMeets count] > 0 && futuremeets <= 0);
         }];
         NSArray *pastMeetArray = [self.contactModelArray filteredArrayUsingPredicate:allPastMeetsPredicate];
@@ -410,8 +410,8 @@ void addressBookChanged(ABAddressBookRef addressBook, CFDictionaryRef info, void
             if ([contact1 isKindOfClass:[IMIContactModel class]] && [contact2 isKindOfClass:[IMIContactModel class]]) {
                 IMIContactModel *c1 = contact1;
                 IMIContactModel *c2 = contact2;
-                int futuremeets1 = c1.todaysUpcommingMeets;
-                int futuremeets2 = c2.todaysUpcommingMeets;
+                int futuremeets1 = (int)c1.todaysUpcommingMeets;
+                int futuremeets2 = (int)c2.todaysUpcommingMeets;
                 if(futuremeets1 > futuremeets2)
                     return (NSComparisonResult)NSOrderedDescending;
                 else if(futuremeets1 < futuremeets2)
@@ -426,8 +426,8 @@ void addressBookChanged(ABAddressBookRef addressBook, CFDictionaryRef info, void
             if ([contact1 isKindOfClass:[IMIContactModel class]] && [contact2 isKindOfClass:[IMIContactModel class]]) {
                 IMIContactModel *c1 = contact1;
                 IMIContactModel *c2 = contact2;
-                int futuremeets1 = c1.futureMeetsExcludingTodaysMeets;
-                int futuremeets2 = c2.futureMeetsExcludingTodaysMeets;
+                int futuremeets1 = (int)c1.futureMeetsExcludingTodaysMeets;
+                int futuremeets2 = (int)c2.futureMeetsExcludingTodaysMeets;
                 if(futuremeets1 > futuremeets2)
                     return (NSComparisonResult)NSOrderedDescending;
                 else if(futuremeets1 < futuremeets2)
@@ -442,8 +442,8 @@ void addressBookChanged(ABAddressBookRef addressBook, CFDictionaryRef info, void
             if ([contact1 isKindOfClass:[IMIContactModel class]] && [contact2 isKindOfClass:[IMIContactModel class]]) {
                 IMIContactModel *c1 = contact1;
                 IMIContactModel *c2 = contact2;
-                int pastmeets1 = [c1.allMeets count];
-                int pastmeets2 = [c2.allMeets count];;
+                int pastmeets1 = (int)[c1.allMeets count];
+                int pastmeets2 = (int)[c2.allMeets count];;
                 
                 
                 if(pastmeets1 > pastmeets2)
@@ -479,14 +479,14 @@ void addressBookChanged(ABAddressBookRef addressBook, CFDictionaryRef info, void
     @synchronized(self) {
         NSPredicate *futureMeetsPredicate = [NSPredicate predicateWithBlock: ^BOOL(id obj, NSDictionary *bind){
             IMIContactModel* contact = (IMIContactModel*)obj;
-            int futuremeets1 = contact.futureMeetsExcludingTodaysMeets + contact.todaysUpcommingMeets;
+            int futuremeets1 = (int)contact.futureMeetsExcludingTodaysMeets + (int)contact.todaysUpcommingMeets;
             return (futuremeets1 > 0);
         }];
         NSArray *futureMeetArray = [self.contactModelArray filteredArrayUsingPredicate:futureMeetsPredicate];
         
         NSPredicate *allPastMeetsPredicate = [NSPredicate predicateWithBlock: ^BOOL(id obj, NSDictionary *bind){
             IMIContactModel* contact = (IMIContactModel*)obj;
-            int futuremeets = contact.futureMeetsExcludingTodaysMeets + contact.todaysUpcommingMeets;
+            int futuremeets = (int)contact.futureMeetsExcludingTodaysMeets + (int)contact.todaysUpcommingMeets;
             return ([contact.allMeets count] > 0 && futuremeets <= 0);
         }];
         NSArray *pastMeetArray = [self.contactModelArray filteredArrayUsingPredicate:allPastMeetsPredicate];
@@ -502,8 +502,8 @@ void addressBookChanged(ABAddressBookRef addressBook, CFDictionaryRef info, void
             if ([contact1 isKindOfClass:[IMIContactModel class]] && [contact2 isKindOfClass:[IMIContactModel class]]) {
                 IMIContactModel *c1 = contact1;
                 IMIContactModel *c2 = contact2;
-                int futuremeets1 = c1.futureMeetsExcludingTodaysMeets + c1.todaysUpcommingMeets;
-                int futuremeets2 = c2.futureMeetsExcludingTodaysMeets + c2.todaysUpcommingMeets;
+                int futuremeets1 = (int)c1.futureMeetsExcludingTodaysMeets + (int)c1.todaysUpcommingMeets;
+                int futuremeets2 = (int)c2.futureMeetsExcludingTodaysMeets + (int)c2.todaysUpcommingMeets;
                 if(futuremeets1 > futuremeets2)
                     return (NSComparisonResult)NSOrderedDescending;
                 else if(futuremeets1 < futuremeets2)
@@ -518,8 +518,8 @@ void addressBookChanged(ABAddressBookRef addressBook, CFDictionaryRef info, void
             if ([contact1 isKindOfClass:[IMIContactModel class]] && [contact2 isKindOfClass:[IMIContactModel class]]) {
                 IMIContactModel *c1 = contact1;
                 IMIContactModel *c2 = contact2;
-                int pastmeets1 = [c1.allMeets count];
-                int pastmeets2 = [c2.allMeets count];;
+                int pastmeets1 = (int)[c1.allMeets count];
+                int pastmeets2 = (int)[c2.allMeets count];;
                 
                 
                 if(pastmeets1 > pastmeets2)
@@ -645,7 +645,7 @@ void addressBookChanged(ABAddressBookRef addressBook, CFDictionaryRef info, void
     
     NSMutableDictionary* addressDict = [self getAddress:person];
     NSMutableString* addressString = [[NSMutableString alloc] initWithFormat:@""];
-    int mvCount = [addressDict count];
+    int mvCount = (int)[addressDict count];
     if (mvCount > 0)    {
         NSArray* keys = [addressDict allKeys];
         

@@ -112,7 +112,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [tableView beginUpdates];
         
-        [self deleteRecordWithIndex:indexPath.row];
+        [self deleteRecordWithIndex:(int)indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationTop];
         
         [tableView endUpdates];

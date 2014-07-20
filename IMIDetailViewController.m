@@ -174,7 +174,7 @@
 
 -(void) setBadge    {
     if(_contactModel)  {
-        int numberOfMeet = [_contactModel.allMeets count];
+        int numberOfMeet = (int)[_contactModel.allMeets count];
         if(numberOfMeet >0) {
             [bedgeBtn setTitle:[NSString stringWithFormat:@"%i", numberOfMeet] forState:UIControlStateNormal];
             
@@ -402,7 +402,7 @@
 
 -(void)demoTableController:(DemoTableController *)controller    {
     if(_contactModel)  {
-        int numberOfMeet = [_contactModel.allMeets count];
+        int numberOfMeet = (int)[_contactModel.allMeets count];
         if(numberOfMeet >0) {
             [bedgeBtn setTitle:[NSString stringWithFormat:@"%i", numberOfMeet] forState:UIControlStateNormal];
             

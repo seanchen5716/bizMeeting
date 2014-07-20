@@ -362,7 +362,7 @@ static DataBase *_database;
                 return FALSE;
             }
             
-            sqlite3_bind_int(init_statement, 1,[[record objectForKey:@"PersonId"] integerValue]);
+            sqlite3_bind_int(init_statement, 1,(int)[[record objectForKey:@"PersonId"] integerValue]);
             sqlite3_bind_text(init_statement, 2,[[record objectForKey:@"Title"] UTF8String],-1,SQLITE_TRANSIENT);
             sqlite3_bind_text(init_statement, 3,[[record objectForKey:@"Alarm"] UTF8String],-1,SQLITE_TRANSIENT);
             sqlite3_bind_text(init_statement, 4,[[record objectForKey:@"Notify"] UTF8String],-1,SQLITE_TRANSIENT);

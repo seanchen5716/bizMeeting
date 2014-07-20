@@ -81,7 +81,7 @@
 + (void)cancelNotification:(NSString*)meetId
 {
     NSArray *notifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
-    NSLog(@"Cancelling... Before %d",[[[UIApplication sharedApplication]scheduledLocalNotifications]count]);
+    NSLog(@"Cancelling... Before %d",(int)[[[UIApplication sharedApplication]scheduledLocalNotifications]count]);
     
     for (UILocalNotification *notification in notifications)
     {
@@ -94,6 +94,6 @@
             [[UIApplication sharedApplication] cancelLocalNotification:notification];
         }
     }
-    NSLog(@"Cancelling... After %d",[[[UIApplication sharedApplication]scheduledLocalNotifications]count]);
+    NSLog(@"Cancelling... After %lu",(unsigned long)[[[UIApplication sharedApplication]scheduledLocalNotifications]count]);
 }
 @end

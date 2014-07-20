@@ -328,7 +328,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="info@appsstreet.com">
+                                <state key="normal" title="web@sw-studio.net">
                                     <color key="titleColor" red="0.984375" green="0.70414825400452119" blue="0.19649057234712997" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -347,7 +347,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="www.appsstreet.com">
+                                <state key="normal" title="sw-studi.net">
                                     <color key="titleColor" red="0.97588488520408168" green="0.69807506085166393" blue="0.19479586502975313" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1173,6 +1173,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="phZ-2J-S0w"/>
         <segue reference="V0C-IL-srJ"/>
-        <segue reference="Vn1-Oc-1jr"/>
+        <segue reference="Hy6-SS-47C"/>
     </inferredMetricsTieBreakers>
 </document>

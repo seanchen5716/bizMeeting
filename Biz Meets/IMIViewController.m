@@ -277,22 +277,22 @@
              contactModel = [_contactModelDataSourceReferences objectAtIndex:indexPath.row];
         }
     }
-    int numberofMeets = [contactModel.allMeets count];
-    int allfutureMeetsCount = contactModel.todaysUpcommingMeets + contactModel.futureMeetsExcludingTodaysMeets;
+    int numberofMeets = (int)[contactModel.allMeets count];
+    int allfutureMeetsCount = (int)contactModel.todaysUpcommingMeets + (int)contactModel.futureMeetsExcludingTodaysMeets;
     
     if(numberofMeets > 0) {
         if(allfutureMeetsCount > 0) {
             
             if(contactModel.todaysUpcommingMeets > 0)
-                [aCell initializeTableCellName:[appdelegate.sharedContactModelManager getFullName:contactModel.personRef] Detail:@"Business Meet" image:[UIImage imageNamed:@"greenf.png"]bedgeText:[NSString stringWithFormat:@"%d", allfutureMeetsCount] badgeImage:[UIImage imageNamed:@"greenBadge.png"]];
+                [aCell initializeTableCellName:[appdelegate.sharedContactModelManager getFullName:contactModel.personRef] Detail:[appdelegate.sharedContactModelManager getOrgenizationName:contactModel.personRef] image:[UIImage imageNamed:@"greenf.png"]bedgeText:[NSString stringWithFormat:@"%d", allfutureMeetsCount] badgeImage:[UIImage imageNamed:@"greenBadge.png"]];
             else
-                [aCell initializeTableCellName:[appdelegate.sharedContactModelManager getFullName:contactModel.personRef] Detail:@"Business Meet" image:[UIImage imageNamed:@"redf.png"]bedgeText:[NSString stringWithFormat:@"%d", allfutureMeetsCount] badgeImage:[UIImage imageNamed:@"redBadge.png"]];
+                [aCell initializeTableCellName:[appdelegate.sharedContactModelManager getFullName:contactModel.personRef] Detail:[appdelegate.sharedContactModelManager getOrgenizationName:contactModel.personRef] image:[UIImage imageNamed:@"redf.png"]bedgeText:[NSString stringWithFormat:@"%d", allfutureMeetsCount] badgeImage:[UIImage imageNamed:@"redBadge.png"]];
         }
         else
-            [aCell initializeTableCellName:[appdelegate.sharedContactModelManager getFullName:contactModel.personRef] Detail:@"Business Meet" image:[UIImage imageNamed:@"grayf.png"]bedgeText:[NSString stringWithFormat:@"%d", numberofMeets] badgeImage:[UIImage imageNamed:@"grayBadge.png"]];
+            [aCell initializeTableCellName:[appdelegate.sharedContactModelManager getFullName:contactModel.personRef] Detail:[appdelegate.sharedContactModelManager getOrgenizationName:contactModel.personRef] image:[UIImage imageNamed:@"grayf.png"]bedgeText:[NSString stringWithFormat:@"%d", numberofMeets] badgeImage:[UIImage imageNamed:@"grayBadge.png"]];
     }
     else    {
-        [aCell initializeTableCellName:[appdelegate.sharedContactModelManager getFullName:contactModel.personRef] Detail:@"Business Meet" image:[UIImage imageNamed:@"bluef.png"]bedgeText:@"NO" badgeImage:NULL];
+        [aCell initializeTableCellName:[appdelegate.sharedContactModelManager getFullName:contactModel.personRef] Detail:[appdelegate.sharedContactModelManager getOrgenizationName:contactModel.personRef] image:[UIImage imageNamed:@"bluef.png"]bedgeText:@"NO" badgeImage:NULL];
     }
     contactModel = NULL;
     [aCell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];

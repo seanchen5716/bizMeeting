@@ -108,7 +108,7 @@
 #pragma mark Local mathods
 -(void)initializeTableCellName:(NSString*)name Detail:(NSString*)details image:(UIImage*)pinImage bedgeText:(NSString*)bedgeText badgeImage:(UIImage*)img{
     
-    int count = [name length];
+    int count = (int)[name length];
     int width = count*11;
     if ([name length] > 24) {
         width = 250;

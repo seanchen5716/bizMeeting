@@ -198,7 +198,7 @@
         
         MyAnnotation *ann =(MyAnnotation*) [annotations objectAtIndex:counter];
         if(ann.contactModel)  {
-            int numberOfFutureMeet = ann.contactModel.futureMeetsExcludingTodaysMeets + ann.contactModel.todaysUpcommingMeets;
+            int numberOfFutureMeet = (int)ann.contactModel.futureMeetsExcludingTodaysMeets + (int)ann.contactModel.todaysUpcommingMeets;
             
             MKAnnotationView *view = [mapView viewForAnnotation:ann];
             UIButton* btn = (UIButton* )view.rightCalloutAccessoryView;

@@ -129,10 +129,10 @@
         
         if([self screenPhysicalSize] == SCREEN_SIZE_IPHONE_TALL)    {
             // Load resources for iOS 6.1 or earlier
-            imageName = [NSString stringWithFormat:@"imageTall%d.png", (nimages + 1)];
+            imageName = [NSString stringWithFormat:@"imageTall%d.png", (int)(nimages + 1)];
         } else {
             // Load resources for iOS 7 or later
-            imageName = [NSString stringWithFormat:@"image%d.png", (nimages + 1)];
+            imageName = [NSString stringWithFormat:@"image%d.png", (int)(nimages + 1)];
         }
 		UIImage *image = [UIImage imageNamed:imageName];
 		if (image == nil) {

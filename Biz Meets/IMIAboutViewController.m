@@ -51,7 +51,7 @@
 }
 
 -(IBAction)openWeb:(id)sender   {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://appsstreet.com"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://sw-studio.net"]];
 }
 
 -(IBAction)sendMail:(id)sender  {
@@ -59,7 +59,7 @@
     NSString *subject = [NSString stringWithFormat:@"Mail"];
     
     /* define email address */
-    NSString *mail = [NSString stringWithFormat:@"info@appsstreet.com"];
+    NSString *mail = [NSString stringWithFormat:@"web@sw-studio.net"];
 
     /* create the URL */
     NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"mailto:?to=%@&subject=%@",

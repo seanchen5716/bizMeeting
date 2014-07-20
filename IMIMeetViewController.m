@@ -146,7 +146,7 @@
                 [self.contactphoto setImage:[UIImage imageNamed:@"Default Photo.png"]];
         });
     });
-    int numberOfMeet = [_contactModel.allMeets count];
+    int numberOfMeet = (int)[_contactModel.allMeets count];
     
     if(numberOfMeet >0) {
         [bedgeBtn setTitle:[NSString stringWithFormat:@"%i", numberOfMeet] forState:UIControlStateNormal];
