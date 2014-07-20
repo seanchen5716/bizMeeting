@@ -22,6 +22,7 @@
 @synthesize gpsSwitch;
 @synthesize meetingAlertSwitch;
 @synthesize searchAreaTxtfld;
+@synthesize searchAreaSlider;
 @synthesize mapCell;
 @synthesize gpsCell;
 @synthesize searchAreaCell;
@@ -66,10 +67,11 @@
         [MapSwitch setOn:NO animated:NO];
 
     NSString* area = [appdelegate.sharedSettingmanager getSearchAreaValue];
-    if(area)
+    if(area){
         self.searchAreaTxtfld.text = area;
-    else
-        self.searchAreaTxtfld.text = @"50";
+        self.searchAreaSlider.value = [area integerValue];
+    }else{
+        self.searchAreaTxtfld.text = @"50";}
     
     UIImage *enableTextureImage = [UIImage imageNamed:@"bg.png"];
     UIImageView* imgView = [[UIImageView alloc] initWithImage:enableTextureImage];
@@ -86,6 +88,7 @@
     
     UIView *view = [[UIView alloc] init];
     sattingsTableView.tableFooterView = view;
+
 }
 
 -(void)setshadows:(UITableViewCell*)tableCell  {
@@ -141,10 +144,18 @@
     [appdelegate.sharedSettingmanager setMeetingAlertValue:value];
 }
 
+- (IBAction)showValue:(UISlider *)sender {
+    
+    self.searchAreaTxtfld.text = [NSString stringWithFormat:@"%d", (int)sender.value];
+    
+    [appdelegate.sharedSettingmanager setSearchAreaValue:self.searchAreaTxtfld.text];
+}
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
     if([textField.text isEqualToString:@""] || [textField.text integerValue] == 0)
         textField.text = @"50";
+    
+    self.searchAreaSlider.value = [textField.text floatValue];
     
     [appdelegate.sharedSettingmanager setSearchAreaValue:textField.text];
 }
@@ -215,8 +226,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section == 0 && indexPath.row == 0)    {
-        searchAreaCell.backgroundColor = [UIColor clearColor];;
-        return searchAreaCell;
+        mapCell.backgroundColor = [UIColor clearColor];
+        return mapCell;
     }
     if(indexPath.section == 0 && indexPath.row == 1)    {
         gpsCell.backgroundColor = [UIColor clearColor];
@@ -227,8 +238,9 @@
         return meetingAlertCell;
     }
     if(indexPath.section == 0 && indexPath.row == 3)    {
-        mapCell.backgroundColor = [UIColor clearColor];
-        return mapCell;
+        
+        searchAreaCell.backgroundColor = [UIColor clearColor];;
+        return searchAreaCell;
     }
     return nil;
 }

@@ -108,6 +108,7 @@
                         <outlet property="meetingAlertSwitch" destination="xGA-CP-3l5" id="iEN-SK-gPM"/>
                         <outlet property="sattingsTableView" destination="6gW-H4-3wZ" id="ts1-vb-Pvu"/>
                         <outlet property="searchAreaCell" destination="HeE-5d-KcU" id="2x3-y1-3IK"/>
+                        <outlet property="searchAreaSlider" destination="N2r-bi-0NM" id="Xht-tz-b5T"/>
                         <outlet property="searchAreaTxtfld" destination="6jJ-mY-3n4" id="1JZ-bk-wAN"/>
                         <segue destination="qLF-zw-rA7" kind="modal" identifier="AboutSague" id="hdV-6n-8ig"/>
                     </connections>
@@ -204,7 +205,7 @@
                     </tableViewCellContentView>
                 </tableViewCell>
                 <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Search Area Cell (KM)" id="HeE-5d-KcU">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                    <rect key="frame" x="0.0" y="-10" width="320" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HeE-5d-KcU" id="Uhi-Rk-Mfz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -215,13 +216,20 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Local Search Area (KM)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.85000000000000031" translatesAutoresizingMaskIntoConstraints="NO" id="1i5-g1-z4J" userLabel="Label - Local Search Area (KM)">
-                                <rect key="frame" x="40" y="10" width="170" height="21"/>
+                                <rect key="frame" x="40" y="7" width="170" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.50196081400000003" green="0.50588238240000005" blue="0.50980395079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minValue="0.0" maxValue="9999" translatesAutoresizingMaskIntoConstraints="NO" id="N2r-bi-0NM">
+                                <rect key="frame" x="35" y="40" width="265" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="showValue:" destination="3BB-ZF-FHV" eventType="valueChanged" id="SN3-hY-R0H"/>
+                                </connections>
+                            </slider>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Km" minimumFontSize="14" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6jJ-mY-3n4">
-                                <rect key="frame" x="214.5" y="8" width="83" height="30"/>
+                                <rect key="frame" x="214.5" y="5" width="83" height="30"/>
                                 <color key="backgroundColor" red="0.94117653369903564" green="0.93725496530532837" blue="0.93725496530532837" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="83" id="5fw-7r-s4o"/>
@@ -1165,6 +1173,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="phZ-2J-S0w"/>
         <segue reference="V0C-IL-srJ"/>
-        <segue reference="Hy6-SS-47C"/>
+        <segue reference="Vn1-Oc-1jr"/>
     </inferredMetricsTieBreakers>
 </document>

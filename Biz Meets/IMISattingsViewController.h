@@ -21,6 +21,8 @@
 @property(nonatomic, weak) IBOutlet UISwitch* meetingAlertSwitch;
 @property(nonatomic, weak) IBOutlet UITableView* sattingsTableView;
 @property(nonatomic, weak) IBOutlet UITextField* searchAreaTxtfld;
+@property(nonatomic, weak) IBOutlet UISlider* searchAreaSlider;
 
 -(IBAction)GPSSwitchValuechange:(id)sender;
+-(IBAction)showValue:(UISlider *)sender;
 @end
