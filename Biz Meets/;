@@ -1,0 +1,118 @@
+//
+//  IMIContactModelManager.m
+//  YO MAP
+//
+//  Created by imicreation on 09/10/13.
+//  Copyright (c) 2013 imicreation. All rights reserved.
+//
+
+#import "IMIContactModelManager.h"
+#import "IMIContactModel.h"
+#import <AddressBookUI/AddressBookUI.h>
+#import "DataBase.h"
+
+@interface  IMIContactModelManager  ()
+
+
+@end
+
+@implementation IMIContactModelManager
+@synthesize modelDelegate;
+@synthesize contactModelArray;
+
+- (id)init {
+
+    self = [super init];
+    
+    if(self) {
+        self.contactModelArray = [[NSMutableArray alloc] init];
+        
+        ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, NULL);
+        if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
+            ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
+                
+                [self getCABAccess];
+            });
+        }
+        else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+            [self getCABAccess];
+        }
+        else    {
+        
+            // The user has previously denied access
+            // Send an alert telling user to change privacy setting in settings app
+
+        }
+    }
+    return self;
+}
+
+-(IMIContactModel*)newContactModel:(ABRecordRef) contactRef{
+    
+    IMIContactModel* contact = [IMIContactModel contactWithPersonRecordRef:contactRef];
+    return contact;
+}
+
+-(void)fillContactModelArray:(CFArrayRef) contactArray   {
+    
+    IMIContactModel* contact = NULL;
+    int numberofContact = CFArrayGetCount(contactArray);
+    for (int count = 0; count < numberofContact; count++) {
+        ABRecordRef person = CFArrayGetValueAtIndex(contactArray, count);
+        contact = [self newContactModel:person];
+        [self.contactModelArray addObject:contact];
+        contact = NULL;
+    }
+}
+
+-(void)getCABAccess  {
+    ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, NULL);
+    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
+        ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
+            // First time access has been granted, add the contact
+           CFArrayRef _array = ABAddressBookCopyArrayOfAllPeople(addressBookRef);
+            [self fillContactModelArray:_array];
+        });
+    }
+    else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+        // The user has previously given access, add the contact
+        CFArrayRef _array = ABAddressBookCopyArrayOfAllPeople(addressBookRef);
+        [self fillContactModelArray:_array];
+        
+    }
+    else {
+        // The user has previously denied access
+        // Send an alert telling user to change privacy setting in settings app
+    }
+}
+
+
+// Database update mathods
+
+-(BOOL) saveMeet:(NSMutableDictionary*)meetInfo {
+    
+    DataBase* db = [[DataBase alloc]init];
+    BOOL status = [db saveMeet:meetInfo];
+    
+    if(status)  {
+        
+        IMIContactModel* contact = [self recordReferenceWithRecordID:[[meetInfo objectForKey:@"PersonId"] integerValue]];
+        [contact refreshContact];
+        return YES;
+    }
+    return NO
+}
+
+-(IMIContactModel*)recordReferenceWithRecordID:(ABRecordID)recordId  {
+    
+    for (IMIContactModel* contact in self.contactModelArray)    {
+        if(contact.personRef)
+          if(ABRecordGetRecordID(contact.personRef) == recordId)
+              return contact;
+        
+    }
+    return NULL;
+}
+
+
+@end

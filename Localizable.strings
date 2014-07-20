@@ -1,0 +1,11 @@
+//Application Name
+"ApplicationNameString" = "%@";
+
+// Tab names
+"ContactsTab" = "Contacts";
+"MapTab" = "Map";
+"SettingsTab" = "Settings";
+
+// 3G Prompt
+"3GPromptHeader" = "Not Connected to Wifi";
+"3GPromptString" = "You are not connected to Network, Please check network settings.";
